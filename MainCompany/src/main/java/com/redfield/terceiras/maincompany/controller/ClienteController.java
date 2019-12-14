@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,22 +27,25 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api/cliente")
 @Api(value="API Rest Clientes")
-
 public class ClienteController {
 	
 	@Autowired
 	private ClienteRepository clienteR;
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@PostMapping("")
 	@ApiOperation(value="Adiciona Cliente")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente addCliente(@Valid @RequestBody Cliente cliente) {
+		logger.info("{}", cliente);
 		return clienteR.save(cliente);
 	}
 	
 	@GetMapping("")
 	@ApiOperation(value="Lista todos Clientes")
 	public List<Cliente> getClientes() {
+		logger.info("{}", clienteR.findAll());
 		return clienteR.findAll();
 	}
 	
@@ -50,6 +55,7 @@ public class ClienteController {
 		Cliente cliente = clienteR.findByUc(uc);
 		if (cliente == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
+		logger.info("{}", cliente);
 		return ResponseEntity.ok(cliente);
 	}
 }
