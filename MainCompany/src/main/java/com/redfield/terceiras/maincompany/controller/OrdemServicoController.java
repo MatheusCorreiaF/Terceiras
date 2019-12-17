@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.redfield.terceiras.maincompany.FilaOSProxy;
 import com.redfield.terceiras.maincompany.model.OrdemServico;
 import com.redfield.terceiras.maincompany.repository.ClienteRepository;
 import com.redfield.terceiras.maincompany.repository.OrdemServicoRepository;
@@ -29,14 +30,20 @@ public class OrdemServicoController {
 	@Autowired
 	private ClienteRepository clienteR;
 	
+	@Autowired
+	private FilaOSProxy filaOSP;
+	
 	@PostMapping("")
 	@ApiOperation(value="Adiciona Ordem de Serviço")
 	@ResponseStatus(HttpStatus.CREATED)
 	public OrdemServico addOS(@RequestBody OrdemServico os) {
+		System.out.println("////////////////////////////////////////////////////1");
 		if(clienteR.findByUc(os.getUc()) == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
 		osR.save(os);
-		os.setServico("Funfoooooooooooooou!");
+		OrdemServico osRBMQ = filaOSP.addOSaFila(os);
+		//System.out.println("////////////////////////////////////////////////////2");
+		osRBMQ.setServico("Funfoooooooooooooou!");
 		return os;
 	}
 	
