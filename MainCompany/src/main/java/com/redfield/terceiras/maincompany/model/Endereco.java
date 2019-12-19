@@ -1,15 +1,21 @@
 package com.redfield.terceiras.maincompany.model;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class Endereco
 {
+	@NotNull(message = "Rua é obrigatório")
 	private String rua;
+	@NotNull(message = "Bairro é obrigatório")
 	private String bairro;
+	@NotNull(message = "Número é obrigatório")
 	private String numero;
 	private String cep;
+	@NotNull(message = "Cidade é obrigatório")
 	private String cidade;
+	@NotNull(message = "Estado é obrigatório")
 	private String estado;
 		
 	public Endereco() {

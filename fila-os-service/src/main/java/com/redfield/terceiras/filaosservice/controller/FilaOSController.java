@@ -37,7 +37,6 @@ public class FilaOSController {
 		ObjectMapper obj = new ObjectMapper();
 		String json = obj.writeValueAsString(os);
 		// adiciona a fila
-		System.out.println("Teeeeeeeeeeeeeeste rbmq");
 		rabbitTemplate.convertAndSend(filaEntradaOS, json);
 
 		

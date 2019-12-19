@@ -37,14 +37,12 @@ public class OrdemServicoController {
 	@ApiOperation(value="Adiciona Ordem de Serviço")
 	@ResponseStatus(HttpStatus.CREATED)
 	public OrdemServico addOS(@RequestBody OrdemServico os) {
-		System.out.println("////////////////////////////////////////////////////1");
 		if(clienteR.findByUc(os.getUc()) == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
-		osR.save(os);
-		OrdemServico osRBMQ = filaOSP.addOSaFila(os);
-		//System.out.println("////////////////////////////////////////////////////2");
-		osRBMQ.setServico("Funfoooooooooooooou!");
-		return os;
+		os.setStatus("Pendente");
+		OrdemServico osThis = osR.save(os);
+		filaOSP.addOSaFila(osThis);
+		return osThis;
 	}
 	
 	@GetMapping("")

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Cliente {
@@ -15,8 +16,11 @@ public class Cliente {
 	@Column(name = "unidade_consumidora")
 	private Long uc;//unidade consumidora
 	@Embedded
+	@NotNull(message = "Endereço é obrigatório")
 	private Endereco endereco;
+	@NotNull(message = "CPF é obrigatório")
 	private String cpf;
+	@NotNull(message = "Nomeé obrigatório")
 	private String nome;
 	private String telefone;
 	private String email;

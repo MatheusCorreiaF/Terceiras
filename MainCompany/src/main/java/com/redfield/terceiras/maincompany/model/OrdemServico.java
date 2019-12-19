@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -14,9 +15,11 @@ public class OrdemServico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@NotNull(message = "Serviço é obrigatório")
 	@Length(min=10, message = "O tamanho deve ter 15 caracteres no mínimo")
 	private String servico;
 	@Column(name = "unidade_consumidora")
+	@NotNull(message = "Unidade Consumidora é obrigatória")
 	private Long uc;//unidade consumidora
 	private String terceira;//cnpj
 	private String status;
