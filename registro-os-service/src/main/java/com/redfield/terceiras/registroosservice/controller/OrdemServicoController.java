@@ -16,16 +16,13 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/registro-os")
 @Api(value = "API Rest Registro OS")
 public class OrdemServicoController {
-	
+
 	@Autowired
 	private MainCompanyProxy mcP;
-	
+
 	@PostMapping("")
 	@ApiOperation(value = "Encaminha dados da OS para a central")
 	public OrdemServico registraOS(@RequestBody OrdemServico os) {
-		OrdemServico teste;
-		teste = mcP.addOS(os);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + teste.getServico() + " <<<<<<<<<<<<<<<<<<<<<<<");
-		return os;
+		return mcP.addOS(os);
 	}
 }

@@ -1,8 +1,5 @@
-package com.redfield.terceiras.maincompany.model;
+package com.redfield.terceiras.registroosservice.model;
 
-import javax.persistence.Embeddable;
-
-@Embeddable
 public class Terceira
 {
 	private String cnpj;

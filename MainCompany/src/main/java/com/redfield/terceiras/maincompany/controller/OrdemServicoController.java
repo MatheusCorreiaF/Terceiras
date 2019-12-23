@@ -2,7 +2,12 @@ package com.redfield.terceiras.maincompany.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +17,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.redfield.terceiras.maincompany.FilaOSProxy;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redfield.terceiras.maincompany.model.OrdemServico;
 import com.redfield.terceiras.maincompany.repository.ClienteRepository;
 import com.redfield.terceiras.maincompany.repository.OrdemServicoRepository;
@@ -29,19 +35,38 @@ public class OrdemServicoController {
 	private OrdemServicoRepository osR;
 	@Autowired
 	private ClienteRepository clienteR;
-	
 	@Autowired
-	private FilaOSProxy filaOSP;
+	private RabbitTemplate rabbitTemplate;
+	@Value("${fila.entrada.os}")
+	private String filaEntradaOS;
+	//@Autowired
+	//private FilaOSProxy filaOSP;
+	
+	/*
+	 * @PostMapping("")
+	 * 
+	 * @ApiOperation(value="Adiciona Ordem de Serviço")
+	 * 
+	 * @ResponseStatus(HttpStatus.CREATED) public OrdemServico
+	 * addOS(@Valid @NotNull @RequestBody OrdemServico os) {
+	 * if(clienteR.findByUc(os.getUc()) == null) throw new
+	 * ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
+	 * os.setStatus("Pendente"); OrdemServico osThis = osR.save(os);
+	 * filaOSP.addOSaFila(osThis); return osThis; }
+	 */
 	
 	@PostMapping("")
 	@ApiOperation(value="Adiciona Ordem de Serviço")
 	@ResponseStatus(HttpStatus.CREATED)
-	public OrdemServico addOS(@RequestBody OrdemServico os) {
+	public OrdemServico addOS(@Valid @NotNull @RequestBody OrdemServico os) throws JsonProcessingException {
 		if(clienteR.findByUc(os.getUc()) == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
 		os.setStatus("Pendente");
 		OrdemServico osThis = osR.save(os);
-		filaOSP.addOSaFila(osThis);
+		ObjectMapper obj = new ObjectMapper();
+		String json = obj.writeValueAsString(osThis);
+		// adiciona a fila
+		rabbitTemplate.convertAndSend(filaEntradaOS, json);
 		return osThis;
 	}
 	

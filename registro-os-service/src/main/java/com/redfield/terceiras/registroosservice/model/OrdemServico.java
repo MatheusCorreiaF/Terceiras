@@ -5,7 +5,7 @@ public class OrdemServico {
 	private Long id;
 	private String servico;
 	private Long uc;//unidade consumidora
-	private String terceira;//cnpj
+	private Terceira terceira;//cnpj
 	private String status;
 	private String obs;
 	
@@ -13,7 +13,7 @@ public class OrdemServico {
 		super();
 	}
 
-	public OrdemServico(long id, String servico, Long uc, String terceira, String status, String obs) {
+	public OrdemServico(long id, String servico, Long uc, Terceira terceira, String status, String obs) {
 		super();
 		this.id = id;
 		this.servico = servico;
@@ -47,11 +47,11 @@ public class OrdemServico {
 		this.uc = uc;
 	}
 
-	public final String getTerceira() {
+	public final Terceira getTerceira() {
 		return terceira;
 	}
 
-	public final void setTerceira(String terceira) {
+	public final void setTerceira(Terceira terceira) {
 		this.terceira = terceira;
 	}
 

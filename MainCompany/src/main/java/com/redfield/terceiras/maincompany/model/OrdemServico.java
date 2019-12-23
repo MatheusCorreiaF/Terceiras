@@ -1,6 +1,7 @@
 package com.redfield.terceiras.maincompany.model;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,8 @@ public class OrdemServico {
 	@Column(name = "unidade_consumidora")
 	@NotNull(message = "Unidade Consumidora é obrigatória")
 	private Long uc;//unidade consumidora
-	private String terceira;//cnpj
+	@Embedded
+	private Terceira terceira;//cnpj
 	private String status;
 	private String obs;
 	
@@ -29,9 +31,11 @@ public class OrdemServico {
 		super();
 	}
 
-	public OrdemServico(long id,
-			@Length(min = 10, message = "O tamanho deve ter 15 caracteres no mínimo") String servico, Long uc,
-			String terceira, String status, String obs) {
+	
+	public OrdemServico(Long id,
+			@NotNull(message = "Serviço é obrigatório") @Length(min = 10, message = "O tamanho deve ter 15 caracteres no mínimo") String servico,
+			@NotNull(message = "Unidade Consumidora é obrigatória") Long uc,
+			com.redfield.terceiras.maincompany.model.Terceira terceira, String status, String obs) {
 		super();
 		this.id = id;
 		this.servico = servico;
@@ -40,6 +44,7 @@ public class OrdemServico {
 		this.status = status;
 		this.obs = obs;
 	}
+
 
 	public final long getId() {
 		return id;
@@ -65,11 +70,11 @@ public class OrdemServico {
 		this.uc = uc;
 	}
 
-	public final String getTerceira() {
+	public final Terceira getTerceira() {
 		return terceira;
 	}
 
-	public final void setTerceira(String terceira) {
+	public final void setTerceira(Terceira terceira) {
 		this.terceira = terceira;
 	}
 
