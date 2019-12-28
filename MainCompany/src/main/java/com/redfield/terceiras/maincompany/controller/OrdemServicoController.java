@@ -1,7 +1,5 @@
 package com.redfield.terceiras.maincompany.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +7,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,10 +67,11 @@ public class OrdemServicoController {
 		return osThis;
 	}
 	
-	@GetMapping("")
-	@ApiOperation(value="Lista de Ordens de Serviço")
-	public List<OrdemServico> getOS() {
-		return osR.findAll();
-	}
+	/*
+	 * @GetMapping("")
+	 * 
+	 * @ApiOperation(value="Lista de Ordens de Serviço") public List<OrdemServico>
+	 * getOS() { return osR.findAll(); }
+	 */
 	
 }

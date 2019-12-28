@@ -1,20 +1,13 @@
 package com.redfield.terceiras.maincompany.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,20 +27,23 @@ public class ClienteController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@PostMapping("")
-	@ApiOperation(value="Adiciona Cliente")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente addCliente(@Valid @RequestBody Cliente cliente) {
-		logger.info("{}", cliente);
-		return clienteR.save(cliente);
-	}
+	/*
+	 * @PostMapping("")
+	 * 
+	 * @ApiOperation(value="Adiciona Cliente")
+	 * 
+	 * @ResponseStatus(HttpStatus.CREATED) public Cliente
+	 * addCliente(@Valid @RequestBody Cliente cliente) { logger.info("{}", cliente);
+	 * return clienteR.save(cliente); }
+	 */
 	
-	@GetMapping("")
-	@ApiOperation(value="Lista todos Clientes")
-	public List<Cliente> getClientes() {
-		logger.info("{}", clienteR.findAll());
-		return clienteR.findAll();
-	}
+	/*
+	 * @GetMapping("")
+	 * 
+	 * @ApiOperation(value="Lista todos Clientes") public List<Cliente>
+	 * getClientes() { logger.info("{}", clienteR.findAll()); return
+	 * clienteR.findAll(); }
+	 */
 	
 	@GetMapping("/{uc}")
 	@ApiOperation(value="Busca Cliente pela Unidade Consumidora")
