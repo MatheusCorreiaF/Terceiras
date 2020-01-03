@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
+import { Cliente } from './cliente';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +10,20 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
 
-  clientes = [];
-  constructor(private loginService: LoginService) { }
+  cliente = new Cliente();
+  
+  constructor(private loginService: LoginService,
+              private router: Router) { }
 
   ngOnInit() {
-    this.consultar();
+    this.loginService.consultar();
   }
 
-  consultar() {
-    //assim que o método obtivewr resposta, eu atribuo a 'resposta', e então utilizo essa 'resposta como necessario'
-    this.loginService.getClientes().subscribe(
-      resposta => this.clientes = <any>resposta)
-  }
+  
 
   fazerLogin()
-  {}
+  {
+    this.loginService.autenticaCliente(this.cliente)
+    this.router.navigate(["/lista-os"]);
+  }
 }

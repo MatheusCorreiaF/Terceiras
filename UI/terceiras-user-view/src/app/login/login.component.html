@@ -1,8 +1,8 @@
 <div style="text-align: center; max-width: 500px; padding-top: 50px;" class="container">
     <h5 style="font-size: 28pt;">Login</h5>
-    <input class="form-control" type="text" placeholder="Unidade Consumidora"/>
+    <input [(ngModel)]="cliente.uc" class="form-control" type="text" placeholder="Unidade Consumidora" />
     <br>
-    <input class="form-control" type="text" placeholder="CPF/CNPJ" />
+    <input [(ngModel)]="cliente.cpf" class="form-control" type="text" placeholder="CPF/CNPJ" />
     <br>
     <a (click)=fazerLogin() class="btn btn-primary" style="font-size: 20pt;">Acessar</a>
 
@@ -12,7 +12,7 @@
           <th>UC</th>
         </tr>
         <tr *ngFor="let cliente of clientes" >
-          <th>{{cliente.nome}}</th>
+          <th>{{cliente | json}}</th>
           <th>{{cliente.uc}}</th>
         </tr>
       </table>
