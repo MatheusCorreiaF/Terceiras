@@ -6,14 +6,5 @@
     <br>
     <a (click)=fazerLogin() class="btn btn-primary" style="font-size: 20pt;">Acessar</a>
 
-    <table class="table">
-        <tr>
-          <th>Nome</th>
-          <th>UC</th>
-        </tr>
-        <tr *ngFor="let cliente of clientes" >
-          <th>{{cliente | json}}</th>
-          <th>{{cliente.uc}}</th>
-        </tr>
-      </table>
+    
 </div>

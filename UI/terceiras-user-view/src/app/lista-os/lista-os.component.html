@@ -1,1 +1,18 @@
 <p>lista-os works!</p>
+<a (click)=reloadTable() class="btn btn-primary" style="font-size: 20pt;">Load</a>
+<table class="table">
+    <tr>
+      <th>ID</th>
+      <th>UC</th>
+      <th>Observação</th>
+      <th>Status</th>
+      <th>Terceira</th>
+    </tr>
+    <tr *ngFor="let os of oss" >
+      <th>{{os.id}}</th>
+      <th>{{os.uc}}</th>
+      <th>{{os.obs}}</th>
+      <th>{{os.status}}</th>
+      <th>{{os.terceira.razaoSocial}}</th>
+    </tr>
+  </table>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
-import { Cliente } from './cliente';
+import { Cliente } from '../shared/cliente';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginService.consultar();
+    this.cliente.cpf="a123456789"
+    this.cliente.uc=101
   }
 
   
@@ -24,6 +26,6 @@ export class LoginComponent implements OnInit {
   fazerLogin()
   {
     this.loginService.autenticaCliente(this.cliente)
-    this.router.navigate(["/lista-os"]);
+    this.router.navigate(["/lista-os/"+this.cliente.uc]);
   }
 }

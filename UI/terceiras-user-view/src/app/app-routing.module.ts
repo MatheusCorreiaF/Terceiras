@@ -8,7 +8,7 @@ import { ListaOSComponent } from './lista-os/lista-os.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'lista-os', component: ListaOSComponent, canActivate:[AuthGuard]},
+  { path: 'lista-os/:uc', component: ListaOSComponent, canActivate:[AuthGuard]},
   { path: '', pathMatch: 'full', redirectTo: 'lista-os' }
 ];
 
