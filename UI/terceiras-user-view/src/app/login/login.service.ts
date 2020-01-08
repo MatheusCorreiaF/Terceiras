@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cliente } from '../shared/cliente';
 
@@ -8,9 +8,10 @@ import { Cliente } from '../shared/cliente';
 export class LoginService {
 
   apiUrl = "http://localhost:8765/main-company-service/api/cliente";
-  clientes : Cliente[];
+  clientes: Cliente[];
   usuarioAutenticado: boolean = false;
-    
+  mostrarMenuEmitter = new EventEmitter<boolean>();
+
   constructor(private httpClient: HttpClient) { }
 
   getClientes() {
@@ -23,19 +24,21 @@ export class LoginService {
       resposta => this.clientes = <Cliente[]>resposta)
   }
 
-  autenticaCliente(cliente: Cliente)
-  {
+  autenticaCliente(cliente: Cliente) {
     this.clientes.forEach(element => {
-      if(element.cpf==cliente.cpf && element.uc==cliente.uc)
-      {
+      if (element.cpf == cliente.cpf && element.uc == cliente.uc) {
         cliente = element;
         this.usuarioAutenticado = true;
+        this.mostrarMenuEmitter.emit(this.usuarioAutenticado);
+        sessionStorage.logado = JSON.stringify(element);
+      }
+      else {
+        this.mostrarMenuEmitter.emit(this.usuarioAutenticado);
       }
     });
   }
 
-  estaAutenticado()
-  {
+  estaAutenticado() {
     return this.usuarioAutenticado;
   }
 }

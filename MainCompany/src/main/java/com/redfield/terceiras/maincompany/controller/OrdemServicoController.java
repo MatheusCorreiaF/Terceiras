@@ -52,7 +52,7 @@ public class OrdemServicoController {
 	@PostMapping("")
 	@ApiOperation(value="Adiciona Ordem de Serviço")
 	@ResponseStatus(HttpStatus.CREATED)
-	public OrdemServico addOS(@Valid @NotNull @RequestBody OrdemServico os) throws JsonProcessingException {
+	public OrdemServico addOS(@RequestBody OrdemServico os) throws JsonProcessingException {
 		if(clienteR.findByUc(os.getUc()) == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
 		return osS.addOS(os);

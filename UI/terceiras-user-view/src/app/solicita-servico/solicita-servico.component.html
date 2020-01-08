@@ -1,0 +1,16 @@
+<div class="container" style="padding: 35px;">
+    <form class="form-horizontal" [formGroup]="formulario">
+        <div class="form-group row" >
+          <h3>Relate o problema no campo abaixo. Estaremos solucionando o mais rápido possível.</h3>
+          <div class="col-sm-12" style="margin-top: 25px;" >
+            <span *ngIf="!campoPreenchido" style="color: red;">Preencha o Campo</span>
+            <textarea id="servico" 
+                      formControlName="servico" 
+                      class="form-control" 
+                      [class.is-invalid]="formulario.get('servico').invalid && formulario.get('servico').touched"
+                      placeholder="Descreva bem o problema para que possamos solucionar o quanto antes."></textarea>
+          </div>
+          <a (click)="enviaOs()" class="btn btn-primary" style="margin-top: 15px; font-size: 20pt;">Enviar</a>
+        </div> 
+    </form>
+</div>

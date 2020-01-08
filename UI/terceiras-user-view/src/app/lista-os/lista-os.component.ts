@@ -23,7 +23,12 @@ export class ListaOSComponent implements OnInit {
 
   ngDoCheck()
   {
-    this.oss=this.listaOsService.getAsOs();
+    this.oss = this.listaOsService.getAsOs();
+
+  }
+  ngOnChange()
+  {
+    this.oss = this.listaOsService.getAsOs();
 
   }
 

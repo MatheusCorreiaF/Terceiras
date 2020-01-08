@@ -1,5 +1,5 @@
 
 export class Terceira {
-    cnpj: String;
-    razaoSocial: String;
+    cnpj: String = "";
+    razaoSocial: String = "";
 }
