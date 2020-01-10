@@ -3,6 +3,7 @@ package com.redfield.terceiras.terceirasservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,7 +19,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/terceiras-service")
+@CrossOrigin
+@RequestMapping("/terceiras")
 @Api(value = "API Rest Terceiras")
 public class TerceirasController {
 	
