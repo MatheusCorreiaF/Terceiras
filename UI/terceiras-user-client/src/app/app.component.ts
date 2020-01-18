@@ -13,7 +13,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.loginService.mostrarMenuEmitter.subscribe(
-      mostrar => this.mostrarMenu = mostrar)
+      mostrar => {this.mostrarMenu = mostrar;console.log(">>>>>>>>" + mostrar);})
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdemServico } from '../shared/ordem-servico';
 import { ListaOsService } from './lista-os.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-os',
@@ -11,7 +12,8 @@ export class ListaOsComponent implements OnInit {
 
   oss: OrdemServico[];
 
-  constructor(private listaOsService: ListaOsService) { }
+  constructor(private listaOsService: ListaOsService,
+              private router: Router) { }
 
   ngOnInit()
   {
@@ -24,5 +26,10 @@ export class ListaOsComponent implements OnInit {
       resposta => this.oss = <OrdemServico[]>resposta)
   }
 
+  acessaDetail(os: OrdemServico)
+  {
+    sessionStorage.osDetail = JSON.stringify(os);
+    this.router.navigate(["/lista-os/",os.id]);
+  }
   
 }

@@ -15,8 +15,7 @@ export class SolicitaServicoComponent implements OnInit {
   formulario: FormGroup;
   cliente = <Cliente>JSON.parse(sessionStorage.logado);
   os = new OrdemServico();
-  campoPreenchido = true; 
-
+  
   constructor(private formBuilder: FormBuilder, 
               private solicitaServicoS: SolicitaServicoService,
               private router: Router) { }
@@ -28,15 +27,18 @@ export class SolicitaServicoComponent implements OnInit {
 
   enviaOs()
   {
+    this.formulario.get('servico').markAsTouched();
     this.os.servico = this.formulario.get('servico').value;
     this.os.uc = this.cliente.uc;
-    if(this.formulario.get('servico').invalid)
+    if(this.formulario.get('servico').valid)
     {
-      this.campoPreenchido = false;
-    } else{
-          this.solicitaServicoS.sendOS(this.os).subscribe(); 
-          this.router.navigate(["/lista-os/"+this.cliente.uc])
-          }
+      this.solicitaServicoS.sendOS(this.os).subscribe(); 
+      this.router.navigate(["/lista-os"])
+    }
   }
 
+  formIsValid()
+  {
+    return this.formulario.get('servico').invalid && this.formulario.get('servico').touched
+  }
 }

@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Terceira } from '../shared/terceira';
 
 @Injectable({
@@ -16,7 +16,12 @@ export class LoginService {
 
   getTerceiras()
   {
-      return this.httpClient.get(this.apiURL);
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+    let headers = new HttpHeaders({
+         Authorization: basicAuthHeaderString})
+
+
+    return this.httpClient.get(this.apiURL, {headers});
   }
 
   consultar()
@@ -27,6 +32,7 @@ export class LoginService {
 
   autenticaTerceira(terceira: Terceira)
   {
+    this.terceiraAutenticada = false;
     for (let i = 0; i < this.terceiras.length; i++) {
       if(terceira.cnpj == this.terceiras[i].cnpj)
       {
@@ -45,5 +51,12 @@ export class LoginService {
   {
     return this.terceiraAutenticada;
   }
+
+  createBasicAuthenticationHttpHeader() {
+       let username = 'redfield'
+       let password = 'redfield'
+       let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+       return basicAuthHeaderString;
+     }
 
 }

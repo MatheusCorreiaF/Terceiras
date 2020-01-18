@@ -13,16 +13,20 @@ export class ListaOsService {
     
   constructor(private httpClient: HttpClient) { }
 
-  getOss(uc: String) {
+  getOss(uc: Number) {
+    return this.httpClient.get<OrdemServico[]>(this.apiUrl+uc);
+  }
+
+  /* getOss(uc: Number) {
     return this.httpClient.get(this.apiUrl+uc);
   }
 
-  consultar(uc: String) {
+  consultar(uc: Number) {
     //assim que o método obtiver resposta, eu atribuo a 'resposta', e então utilizo essa 'resposta como necessario'
     this.getOss(uc).subscribe(
       resposta => this.oss = <OrdemServico[]>resposta)
   }
-
+ */
   getAsOs()
   {
     return this.oss;

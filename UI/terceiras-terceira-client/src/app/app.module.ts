@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ListaOsComponent } from './lista-os/lista-os.component';
+import { DetalhesOsComponent } from './detalhes-os/detalhes-os.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ListaOsComponent
+    ListaOsComponent,
+    DetalhesOsComponent
   ],
   imports: [
     BrowserModule,

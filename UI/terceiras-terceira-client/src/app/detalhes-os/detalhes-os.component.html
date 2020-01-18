@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Detalhes Ordem Serviço</h1>
+    <form class="form-horizontal" [formGroup]="formulario">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="id">ID_OS</label>
+                <input type="text" class="form-control" formControlName="id" id="id" placeholder="ID_OS" readonly>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="uc">Unidade Consumidora</label>
+                <input type="text" class="form-control" formControlName="uc" id="uc" placeholder="UC" readonly>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="status">Status do Serviço</label>
+                <select formControlName="status" id="status" class="form-control">
+                    <option value="pendente">Pendente</option>
+                    <option value="emEspera">Em espera</option>
+                    <option value="emExecucao">Em Execução</option>
+                    <option value="concluido">Concluído</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Serviço/Reclamação</label>
+            <textarea type="text" class="form-control" formControlName="servico" id="servico" placeholder="Serviço parara..." readonly></textarea>
+        </div>
+        <div class="form-group">
+            <label for="observacao">Observação</label>
+            <textarea type="text" class="form-control" formControlName="observacao" id="observacao" placeholder="Observação..."></textarea>
+        </div>
+    </form>
+    <button class="btn btn-primary" (click)="atualizarOS()">Atualizar</button>
+    <button class="btn btn-primary" (click)="backToList()">Voltar</button>
+</div>

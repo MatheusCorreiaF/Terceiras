@@ -17,11 +17,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginService.consultar();
     sessionStorage.logado=null;
+    this.terceira.cnpj="t123456789"
     console.log(sessionStorage.logado);
   }
 
   fazerLogin()
   {
+    sessionStorage.logado = null;
     this.loginService.autenticaTerceira(this.terceira)    
     this.router.navigate(["/lista-os/"]);
   }

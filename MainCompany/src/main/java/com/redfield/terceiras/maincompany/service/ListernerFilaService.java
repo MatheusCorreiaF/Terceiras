@@ -40,7 +40,7 @@ public class ListernerFilaService {
 
 		ObjectMapper mapper = new ObjectMapper();
 		OrdemServico osFromFila = mapper.readValue(json, OrdemServico.class);
-
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		osR.save(osFromFila);
 	}
 

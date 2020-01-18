@@ -19,13 +19,11 @@ export class LoginComponent implements OnInit {
     this.loginService.consultar();
     this.cliente.cpf="a123456789"
     this.cliente.uc=101
-  }
-
-  
+  } 
 
   fazerLogin()
   {
     this.loginService.autenticaCliente(this.cliente)
-    this.router.navigate(["/lista-os/"+this.cliente.uc]);
+    this.router.navigate(["/lista-os"]);
   }
 }

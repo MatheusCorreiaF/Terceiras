@@ -1,0 +1,12 @@
+table {
+    table-layout: fixed;
+}
+
+table th,
+table td {
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+}

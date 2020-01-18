@@ -9,9 +9,9 @@ import { SolicitaServicoComponent } from './solicita-servico/solicita-servico.co
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: 'lista-os/:uc', component: ListaOSComponent, canActivate:[AuthGuard]},
+  { path: 'lista-os', component: ListaOSComponent, canActivate:[AuthGuard]},
   { path: 'os', component: SolicitaServicoComponent, canActivate:[AuthGuard]},
-  { path: '', pathMatch: 'full', redirectTo: 'lista-os/0' }
+  { path: '', pathMatch: 'full', redirectTo: 'lista-os' }
 ];
 
 @NgModule({
