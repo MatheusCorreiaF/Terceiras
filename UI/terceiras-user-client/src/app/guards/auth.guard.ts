@@ -9,23 +9,17 @@ import { Cliente } from '../shared/cliente';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private route: ActivatedRoute, private loginService: LoginService, private router: Router) { }
+  constructor(private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      console.log("Autenticado : " + this.loginService.getAutenticado());
-
-      /* this.loginService.logado.subscribe(
-        logado =>{
-          console.log(logado);
-        }) */
-
-    if (!this.loginService.getAutenticado())
+      console.log("Autenticado : " + <boolean>JSON.parse(sessionStorage.estaAutenticado));
+      
+    if (!<boolean>JSON.parse(sessionStorage.estaAutenticado))
       this.router.navigate(["/login"]);
 
-    return this.loginService.getAutenticado()
+    return <boolean>JSON.parse(sessionStorage.estaAutenticado)
   }
-
 }

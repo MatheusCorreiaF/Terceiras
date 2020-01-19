@@ -10,12 +10,9 @@ export class LoginService {
   apiUrl = "http://localhost:8765/main-company-service/api/cliente";
   //apiUrl = "http://localhost:8080/api/cliente";
   clientes: Cliente[];
-  usuarioAutenticado: boolean = false;
-  mostrarMenuEmitter = new EventEmitter<boolean>();
-  //logado = new EventEmitter<Cliente>();
-
+  mostrarMenuEmitter = new EventEmitter<boolean>(sessionStorage.estaAutenticado);
   constructor(private httpClient: HttpClient) { }
-
+  
   getClientes() {
   /*let username = 'redfield'
     let password = 'redfield'
@@ -38,22 +35,10 @@ export class LoginService {
     this.clientes.forEach(element => {
       if (element.cpf == cliente.cpf && element.uc == cliente.uc) {
         cliente = element;
-        this.usuarioAutenticado = true;
-        this.mostrarMenuEmitter.emit(true);
+        sessionStorage.estaAutenticado = true;
+        this.mostrarMenuEmitter.emit(sessionStorage.estaAutenticado);
         sessionStorage.logado = (JSON.stringify(cliente));
-        //this.logado.emit(element);        
-      }
-      else {
-        this.mostrarMenuEmitter.emit(this.usuarioAutenticado);
       }
     });
-  }
-
-  getAutenticado() {
-    return this.usuarioAutenticado;
-  }
-
-  setAutenticado(value: boolean) {
-    this.usuarioAutenticado = value;;
   }
 }
