@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   cliente = new Cliente();
+  authValid: boolean = true;
   
-  constructor(private loginService: LoginService,
-              private router: Router) { }
+  constructor(private loginService: LoginService,private router: Router) { }
 
   ngOnInit() {
     this.loginService.consultar();
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   fazerLogin()
   {
-    this.loginService.autenticaCliente(this.cliente)
+    this.authValid = this.loginService.autenticaCliente(this.cliente)
     this.router.navigate(["/lista-os"]);
   }
 }

@@ -15,17 +15,21 @@ export class ListaOsComponent implements OnInit {
   constructor(private listaOsService: ListaOsService,
               private router: Router) { }
 
-  ngOnInit()
-  {
-    this.consultar();
+  ngOnInit() {    
+    this.reloadTable()
+  }    
+    
+  ngOnChanges() {    
+    this.reloadTable()
   }
 
-  consultar() {
-    //assim que o método obtivewr resposta, eu atribuo a 'resposta', e então utilizo essa 'resposta como necessario'
+  reloadTable(){
     this.listaOsService.getOss().subscribe(
-      resposta => this.oss = <OrdemServico[]>resposta)
+      response => {
+        this.oss = <OrdemServico[]>response;
+      });
   }
-
+  
   acessaDetail(os: OrdemServico)
   {
     sessionStorage.osDetail = JSON.stringify(os);

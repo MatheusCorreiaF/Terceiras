@@ -12,7 +12,7 @@
                     <th style="width: 20%">Observação</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="oss!=null">
                 <tr *ngFor="let os of oss">
                     <th>{{os.id}}</th>
                     <th>{{os.uc}}</th>
@@ -23,6 +23,6 @@
                 </tr>
             </tbody>
         </table>
+        <h3 *ngIf="oss==null">Não há Ordens de Serviço solicitadas por você!</h3>
     </div>
 </div>
-<button (click)="reloadTable()">Reload</button>

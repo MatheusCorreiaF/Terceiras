@@ -1,23 +1,26 @@
 <div class="container">
     <h1>Solicitações de Serviço</h1>
-    <table class="table table-hover">
-        <thead class="thead-light">
-            <tr>
-                <th>ID</th>
-                <th>UC</th>
-                <th>Serviço</th>
-                <th>Status</th>
-                <th>Observação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let os of oss" (click)="acessaDetail(os)">
-                <th>{{os.id}}</th>
-                <th>{{os.uc}}</th>
-                <th>{{os.servico}}</th>
-                <th>{{os.status}}</th>
-                <th>{{os.obs}}</th>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th style="width: 14%">ID</th>
+                    <th style="width: 14%">UC</th>
+                    <th style="width: 30%">Serviço</th>
+                    <th style="width: 14%">Status</th>
+                    <th style="width: 28%">Observação</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="oss!=null">
+                <tr *ngFor="let os of oss" (click)="acessaDetail(os)">
+                    <th>{{os.id}}</th>
+                    <th>{{os.uc}}</th>
+                    <th>{{os.servico}}</th>
+                    <th>{{os.status}}</th>
+                    <th>{{os.obs}}</th>
+                </tr>
+            </tbody>
+        </table>
+        <h3 *ngIf="oss==null">Não lhe foram solicitadas OSs!</h3>
+    </div>
 </div>

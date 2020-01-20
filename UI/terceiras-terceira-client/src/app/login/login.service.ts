@@ -6,57 +6,35 @@ import { Terceira } from '../shared/terceira';
   providedIn: 'root'
 })
 export class LoginService {
-  
+
   apiURL = `http://localhost:8765/central-terceiras-service/api/central-terceiras/terceira`
   terceiras: Terceira[];
-  terceiraLogada = new EventEmitter<Terceira>();
-  terceiraAutenticada: boolean = false;
-
+  
   constructor(private httpClient: HttpClient) { }
 
-  getTerceiras()
-  {
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+  getTerceiras() {
+    /*let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
     let headers = new HttpHeaders({
-         Authorization: basicAuthHeaderString})
-
-
-    return this.httpClient.get(this.apiURL, {headers});
+         Authorization: basicAuthHeaderString})*/
+    return this.httpClient.get(this.apiURL);
   }
 
-  consultar()
-  {
+  consultar() {
     this.getTerceiras().subscribe(
-      resposta => this.terceiras = <Terceira[]>resposta)
+      resposta => this.terceiras = <Terceira[]>resposta);
   }
 
-  autenticaTerceira(terceira: Terceira)
-  {
-    this.terceiraAutenticada = false;
+  autenticaTerceira(terceira: Terceira): boolean {
+    sessionStorage.estaAutenticada = false;
     for (let i = 0; i < this.terceiras.length; i++) {
-      if(terceira.cnpj == this.terceiras[i].cnpj)
-      {
+      if (terceira.cnpj == this.terceiras[i].cnpj) {
         terceira = this.terceiras[i];
-        console.log(`${terceira.razaoSocial} cadastrado`);
-        this.terceiraAutenticada = true;
-        sessionStorage.logado = JSON.stringify(terceira);
-        return terceira;
-      }      
+        sessionStorage.estaAutenticada = true;
+        sessionStorage.logada = JSON.stringify(terceira);
+        return true;
+      }
     }
     console.log(`Terceira não cadastrada`);
-    return terceira;
+    return false;
   }
-
-  estaAutenticado()
-  {
-    return this.terceiraAutenticada;
-  }
-
-  createBasicAuthenticationHttpHeader() {
-       let username = 'redfield'
-       let password = 'redfield'
-       let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
-       return basicAuthHeaderString;
-     }
-
 }

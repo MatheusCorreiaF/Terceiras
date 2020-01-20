@@ -1,4 +1,4 @@
-<div class="container" style="padding: 35px;">
+<div id="mainDiv" class="container">
     <form class="form-horizontal" [formGroup]="formulario">
         <div class="form-group row">
             <h3>Relate o problema no campo abaixo. Estaremos solucionando o mais rápido possível.</h3>
@@ -8,7 +8,7 @@
             <div class="col-sm-12">
                 <textarea id="servico" formControlName="servico" class="form-control" [class.is-invalid]="formulario.get('servico').invalid && formulario.get('servico').touched" placeholder="Descreva bem o problema para que possamos solucionar o quanto antes."></textarea>
             </div>
-            <button type="button" class="btn btn-primary" (click)="enviaOs()" style="margin-top: 15px; font-size: 20pt;">Enviar</button>
+            <button type="button" class="btn btn-primary" (click)="enviaOs()">Enviar</button>
         </div>
     </form>
 </div>

@@ -11,18 +11,15 @@ export class AuthService implements CanActivate {
 
   terceira = new Terceira();
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-      this.terceira = <Terceira>JSON.parse(sessionStorage.logado);
-
-      console.log(this.loginService.estaAutenticado());
-    if (!this.loginService.estaAutenticado())    
+    if (!<boolean>JSON.parse(sessionStorage.estaAutenticada))    
       return this.router.navigate(["/login"]);
 
-    return this.loginService.estaAutenticado()
+    return <boolean>JSON.parse(sessionStorage.estaAutenticada);
   }
 }

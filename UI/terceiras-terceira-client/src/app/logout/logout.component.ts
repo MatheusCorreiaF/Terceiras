@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +11,9 @@ export class LogoutComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    sessionStorage.estaAutenticado = false;
-    sessionStorage.logado = null;
+    sessionStorage.estaAutenticada = false;
+    sessionStorage.logada = null;
+    console.log("dasdas");
     this.router.navigate(["/login"]);
   }
 

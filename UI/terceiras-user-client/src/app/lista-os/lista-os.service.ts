@@ -27,8 +27,4 @@ export class ListaOsService {
       resposta => this.oss = <OrdemServico[]>resposta)
   }
  */
-  getAsOs()
-  {
-    return this.oss;
-  }
 }

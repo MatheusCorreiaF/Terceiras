@@ -2,9 +2,6 @@ package com.redfield.terceiras.maincompany.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/os")
-@Api(value="API Rest Ordem de Serviço")
+@Api(value = "API Rest Ordem de Serviço")
 @CrossOrigin
 public class OrdemServicoController {
 
@@ -35,44 +32,21 @@ public class OrdemServicoController {
 	private ClienteRepository clienteR;
 	@Autowired
 	private OrdemServicoService osS;
-	
-	/*
-	 * @PostMapping("")
-	 * 
-	 * @ApiOperation(value="Adiciona Ordem de Serviço")
-	 * 
-	 * @ResponseStatus(HttpStatus.CREATED) public OrdemServico
-	 * addOS(@Valid @NotNull @RequestBody OrdemServico os) {
-	 * if(clienteR.findByUc(os.getUc()) == null) throw new
-	 * ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
-	 * os.setStatus("Pendente"); OrdemServico osThis = osR.save(os);
-	 * filaOSP.addOSaFila(osThis); return osThis; }
-	 */
-	
+
 	@PostMapping("")
-	@ApiOperation(value="Adiciona Ordem de Serviço")
+	@ApiOperation(value = "Adiciona Ordem de Serviço")
 	@ResponseStatus(HttpStatus.CREATED)
 	public OrdemServico addOS(@RequestBody OrdemServico os) throws JsonProcessingException {
-		if(clienteR.findByUc(os.getUc()) == null)
+		if (clienteR.findByUc(os.getUc()) == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
 		os.setStatus("pendente");
 		os.setObs("...");
 		return osS.addOS(os);
 	}
-	
+
 	@GetMapping("/uc/{uc}")
-	@ApiOperation(value="Lista OSs por Unidade Consumidora")
-	public List<OrdemServico> getOSsUC(@PathVariable(value = "uc") Long uc)
-	{
+	@ApiOperation(value = "Lista OSs por Unidade Consumidora")
+	public List<OrdemServico> getOSsUC(@PathVariable(value = "uc") Long uc) {
 		return osS.listaOSUC(uc);
 	}
-	
-	
-	/*
-	 * @GetMapping("")
-	 * 
-	 * @ApiOperation(value="Lista de Ordens de Serviço") public List<OrdemServico>
-	 * getOS() { return osR.findAll(); }
-	 */
-	
 }

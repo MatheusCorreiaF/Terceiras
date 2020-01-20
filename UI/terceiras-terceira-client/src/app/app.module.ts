@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ListaOsComponent } from './lista-os/lista-os.component';
 import { DetalhesOsComponent } from './detalhes-os/detalhes-os.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ListaOsComponent,
-    DetalhesOsComponent
+    DetalhesOsComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

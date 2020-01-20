@@ -8,9 +8,8 @@ import { Cliente } from '../shared/cliente';
 export class LoginService {
 
   apiUrl = "http://localhost:8765/main-company-service/api/cliente";
-  //apiUrl = "http://localhost:8080/api/cliente";
   clientes: Cliente[];
-  mostrarMenuEmitter = new EventEmitter<boolean>(sessionStorage.estaAutenticado);
+  
   constructor(private httpClient: HttpClient) { }
   
   getClientes() {
@@ -26,19 +25,20 @@ export class LoginService {
   }
 
   consultar() {
-    //assim que o método obtiver resposta, eu atribuo a 'resposta', e então utilizo essa 'resposta como necessario'
     this.getClientes().subscribe(
       resposta => this.clientes = <Cliente[]>resposta)
   }
 
-  autenticaCliente(cliente: Cliente){
+  autenticaCliente(cliente: Cliente) : boolean{
     this.clientes.forEach(element => {
       if (element.cpf == cliente.cpf && element.uc == cliente.uc) {
         cliente = element;
         sessionStorage.estaAutenticado = true;
-        this.mostrarMenuEmitter.emit(sessionStorage.estaAutenticado);
+        //this.mostrarMenuEmitter.emit(sessionStorage.estaAutenticado);
         sessionStorage.logado = (JSON.stringify(cliente));
+        return true;
       }
     });
+    return false;
   }
 }

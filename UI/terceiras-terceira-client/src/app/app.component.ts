@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Terceira } from './shared/terceira';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +8,21 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'terceiras-terceira-client';
 
+  terceiraLogada = new Terceira();
 
- 
+  constructor() { }
+
+  ngOnInit() {
+    if (sessionStorage.estaAutenticada == undefined)
+      sessionStorage.estaAutenticada = false;
+  }
+
+  estaAutenticada() {
+    if (sessionStorage.logada == undefined)
+      sessionStorage.logada = JSON.stringify(this.terceiraLogada);
+
+    this.terceiraLogada = <Terceira>JSON.parse(sessionStorage.logada)
+    return <boolean>JSON.parse(sessionStorage.estaAutenticada);
+  }
 }

@@ -31,18 +31,7 @@ public class ClienteController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	/*
-	 * @PostMapping("")
-	 * 
-	 * @ApiOperation(value="Adiciona Cliente")
-	 * 
-	 * @ResponseStatus(HttpStatus.CREATED) public Cliente
-	 * addCliente(@Valid @RequestBody Cliente cliente) { logger.info("{}", cliente);
-	 * return clienteR.save(cliente); }
-	 */
-
 	@GetMapping("")
-
 	@ApiOperation(value = "Lista todos Clientes")
 	public List<Cliente> getClientes() {
 		logger.info("{}", clienteR.findAll());

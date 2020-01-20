@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.redfield.terceiras.maincompany.model.OrdemServico;
 
-public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Long>{
+public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Long> {
 
 	List<OrdemServico> findByUc(Long uc);
 

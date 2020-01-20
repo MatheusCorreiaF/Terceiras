@@ -23,7 +23,11 @@ export class ListaOSComponent implements OnInit {
   ngOnInit() {    
     this.reloadTable()
   }    
-    
+   
+  ngOnChanges() {    
+    this.reloadTable()
+  }
+
   reloadTable(){
     this.listaOsService.getOss(this.clienteLogado.uc).subscribe(
       response => {

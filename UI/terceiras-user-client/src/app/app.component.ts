@@ -1,38 +1,28 @@
 import { Component } from '@angular/core';
-import { LoginService } from './login/login.service';
+import { Cliente } from './shared/cliente';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  mostrarMenu: boolean;
 
-  constructor(private loginService: LoginService) { }
+export class AppComponent {
+  
+  clienteLogado = new Cliente();
+
+  constructor() { }
 
   ngOnInit() {
-    if(sessionStorage.estaAutenticado === undefined)
+    if(sessionStorage.estaAutenticado == undefined)
        sessionStorage.estaAutenticado = false;
+  }
+
+  estaAutenticado(){
+    if(sessionStorage.logado==undefined)
+      sessionStorage.logado=JSON.stringify(this.clienteLogado)
     
-    this.loginService.mostrarMenuEmitter.subscribe(
-      mostrar => {
-        this.mostrarMenu = mostrar;
-        console.log(">>>>>>>>" + mostrar);
-      });
-
-    this.mostrarMenu = <boolean>JSON.parse(sessionStorage.estaAutenticado);
-  }
-
-  estaAutenticado()
-  {
-    console.log(<boolean>JSON.parse(sessionStorage.estaAutenticado));
+    this.clienteLogado = <Cliente>JSON.parse(sessionStorage.logado)
     return <boolean>JSON.parse(sessionStorage.estaAutenticado);
-  }
-
-  logout()
-  {
-    sessionStorage.estaAutenticado = false;
-    this.mostrarMenu = <boolean>JSON.parse(sessionStorage.estaAutenticado);
   }
 }

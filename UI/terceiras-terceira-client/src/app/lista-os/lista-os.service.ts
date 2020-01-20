@@ -9,8 +9,7 @@ import { Terceira } from '../shared/terceira';
 export class ListaOsService {
 
   oss : OrdemServico[];
-  usuarioAutenticado: boolean = false;
-  terceira = <Terceira>JSON.parse(sessionStorage.logado);
+  terceira = <Terceira>JSON.parse(sessionStorage.logada);
 
   apiUrl = `http://localhost:8765/terceiras-service/terceiras/cnpj/${this.terceira.cnpj}`;
     
@@ -20,9 +19,4 @@ export class ListaOsService {
     return this.httpClient.get(this.apiUrl);
   }
 
-
-  getAsOs()
-  {
-    return this.oss;
-  }
 }
