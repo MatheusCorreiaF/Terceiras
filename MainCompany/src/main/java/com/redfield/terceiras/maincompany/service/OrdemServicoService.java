@@ -27,7 +27,6 @@ public class OrdemServicoService {
 		OrdemServico osThis = osR.save(os);
 		ObjectMapper obj = new ObjectMapper();
 		String json = obj.writeValueAsString(osThis);
-		// adiciona a fila
 		rabbitTemplate.convertAndSend(filaEntradaOS, json);
 		return osThis;
 	}

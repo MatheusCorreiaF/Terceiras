@@ -1,0 +1,79 @@
+version: "3.7"
+services:
+  naming-server:
+    image: matheuscorreia7/netflix-eureka-naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - terceiras-network
+
+  rabbitmq:
+    image: rabbitmq:3.5.3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+    networks:
+      - terceiras-network
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: terceiras
+    volumes:
+      - mysql-database-data-volume:/var/lib/mysql
+    networks:
+      - terceiras-network
+
+  zuul-api-gateway-server:
+    image: matheuscorreia7/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
+    ports:
+      - "8765:8765"
+    restart: always
+    depends_on: # Start the depends_on first
+      - naming-server
+      - rabbitmq
+      - mysql
+    networks:
+      - terceiras-network
+
+  central-terceiras-service:
+    image: matheuscorreia7/central-terceiras-service:0.0.1-SNAPSHOT
+    ports:
+      - "8383:8383"
+    restart: always
+    depends_on: # Start the depends_on first
+      - naming-server
+      - rabbitmq
+      - mysql
+      - zuul-api-gateway-server
+    networks:
+      - terceiras-network
+
+  terceiras-service:
+    image: matheuscorreia7/terceiras-service:0.0.1-SNAPSHOT
+    ports:
+      - "8484:8484"
+    restart: always
+    depends_on: # Start the depends_on first
+      - naming-server
+      - rabbitmq
+      - mysql
+      - zuul-api-gateway-server
+      - central-terceiras-service
+    networks:
+      - terceiras-network
+
+# Volumes
+volumes:
+  mysql-database-data-volume:
+
+networks:
+  terceiras-network:

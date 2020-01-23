@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  terceiras-user-client:
+    image: terceiras-user-client:0.0.1
+    build: .
+    ports:
+      - 4300:80
