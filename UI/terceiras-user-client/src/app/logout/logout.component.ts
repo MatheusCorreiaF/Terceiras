@@ -10,6 +10,7 @@ export class LogoutComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  //encerra a sessão e encaminha para a tela de login
   ngOnInit() {
     sessionStorage.estaAutenticado = false;
     sessionStorage.logado = null;

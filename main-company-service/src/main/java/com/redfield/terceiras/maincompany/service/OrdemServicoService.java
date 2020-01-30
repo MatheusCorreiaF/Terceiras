@@ -23,6 +23,7 @@ public class OrdemServicoService {
 	@Value("${fila.entrada.os}")
 	private String filaEntradaOS;
 
+	//método que salva a Ordem de Serviço no DB e envia para a fila
 	public OrdemServico addOS(OrdemServico os) throws JsonProcessingException {
 		os.setObs("...");
 		os.setStatus("Pendente");
@@ -34,6 +35,7 @@ public class OrdemServicoService {
 		return osThis;
 	}
 
+	//lista as Ordens de Serviço por Unidade Consumidora
 	public List<OrdemServico> listaOSUC(Long uc) {
 		return osR.findByUc(uc);
 	}

@@ -20,7 +20,7 @@ export class DetalhesOsComponent implements OnInit {
 
   ngOnInit() {
     this.os = <OrdemServico>JSON.parse(sessionStorage.osDetail);
-    
+    //instancia o formulário
     this.formulario = this.formBuilder.group({
       id: [null, [Validators.required]],
       uc: [null, [Validators.required]],
@@ -32,6 +32,7 @@ export class DetalhesOsComponent implements OnInit {
     this.populaDadosForm();
   }
 
+  //inicializa valores do formulário
   populaDadosForm()
   {
     this.formulario.patchValue( 
@@ -44,6 +45,7 @@ export class DetalhesOsComponent implements OnInit {
     });
   }
 
+  //chama o método que fará requisição para atualizar a OS
   atualizarOS()
   {
     this.os.obs = this.formulario.get('observacao').value;
@@ -51,7 +53,7 @@ export class DetalhesOsComponent implements OnInit {
     this.detailOSService.atualizaOS(this.os).subscribe();
     this.router.navigate([`/lista-os`]);
   }
-  
+  //navega p/ a lista de OS
   backToList(){
     this.router.navigate([`/lista-os`]);
   }

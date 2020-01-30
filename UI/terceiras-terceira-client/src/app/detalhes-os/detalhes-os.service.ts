@@ -11,6 +11,7 @@ export class DetalhesOsService {
 
   apiUrl = `http://localhost:8765/terceiras-service/terceiras`;
 
+  //envia a requisição com as alterações da OS
   atualizaOS(os: OrdemServico)
   {
     return this.httpClient.put(this.apiUrl,os);

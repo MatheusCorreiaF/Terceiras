@@ -32,6 +32,7 @@ public class CentralTerceirasService {
 	@Autowired
 	private OrdemServicoRepository osR;
 
+	//método que atribui uma Terceira para realizar o serviço
 	public Terceira delegaTerceirizada() {
 		//lista as Tercerizadas cadastradas
 		List<Terceira> terceiras = terceiraR.findAll();
@@ -51,7 +52,7 @@ public class CentralTerceirasService {
 		}
 		return null;
 	}
-
+	//método que atualiza a Ordem de serviço e salva no DB
 	public OrdemServico atualizaOS(OrdemServico os) throws JsonProcessingException {
 		os=osR.save(os);
 		ObjectMapper obj = new ObjectMapper();

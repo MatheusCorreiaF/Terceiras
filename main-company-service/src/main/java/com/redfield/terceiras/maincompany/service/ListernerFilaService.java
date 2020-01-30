@@ -27,6 +27,7 @@ public class ListernerFilaService {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
+	//método que retira os dados da fila
 	@RabbitListener(queues = "${fila.response.os}")
 	public void onMessage(Message message) throws JsonParseException, JsonMappingException, IOException {
 

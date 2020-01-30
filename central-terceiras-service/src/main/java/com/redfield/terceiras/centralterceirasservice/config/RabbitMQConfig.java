@@ -11,6 +11,7 @@ public class RabbitMQConfig {
 	@Value("${fila.response.os}")
 	private String filaResponseOS;
 	
+	//cria a fila
 	@Bean
     public Queue queueResponse() {
         return new Queue(filaResponseOS, true);
@@ -19,8 +20,10 @@ public class RabbitMQConfig {
 	@Value("${fila.entrada.os}")
 	private String filaEntradaOS;
 	
+	//cria a fila
 	@Bean
     public Queue queueEntrada() {
         return new Queue(filaEntradaOS, true);
     }
+	
 }

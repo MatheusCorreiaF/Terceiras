@@ -15,6 +15,7 @@ export class ListaOsComponent implements OnInit {
   constructor(private listaOsService: ListaOsService,
     private router: Router) { }
 
+  //preenche a tabela quando inicializa o componente
   ngOnInit() {
     this.reloadTable()
   }
@@ -22,14 +23,14 @@ export class ListaOsComponent implements OnInit {
   ngAfterViewInit() {
     this.reloadTable()
   }
-
+  //lista as OS
   reloadTable() {
     this.listaOsService.getOss().subscribe(
       response => {
         this.oss = <OrdemServico[]>response;
       });
   }
-
+  //encaminha para a os clicada 
   acessaDetail(os: OrdemServico) {
     sessionStorage.osDetail = JSON.stringify(os);
     this.router.navigate(["/lista-os/", os.id]);

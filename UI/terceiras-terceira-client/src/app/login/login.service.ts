@@ -12,18 +12,19 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
+  //consulta Terceiras cadastradas
   getTerceiras() {
     /*let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
     let headers = new HttpHeaders({
          Authorization: basicAuthHeaderString})*/
     return this.httpClient.get(this.apiURL);
   }
-
   consultar() {
     this.getTerceiras().subscribe(
       resposta => this.terceiras = <Terceira[]>resposta);
   }
 
+  //verifica se as credenciais são válidas
   autenticaTerceira(terceira: Terceira): boolean {
     sessionStorage.estaAutenticada = false;
     for (let i = 0; i < this.terceiras.length; i++) {

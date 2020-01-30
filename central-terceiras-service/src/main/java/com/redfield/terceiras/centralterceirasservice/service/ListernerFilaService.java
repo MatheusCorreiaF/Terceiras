@@ -31,6 +31,7 @@ public class ListernerFilaService {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
+	//método que retira a Ordem de Serviço da fila e atualiza no bando de dados
 	@HystrixCommand(fallbackMethod = "republicOnMessage")
 	@RabbitListener(queues = "${fila.entrada.os}")
 	public void onMessage(Message message) throws JsonParseException, JsonMappingException, IOException {

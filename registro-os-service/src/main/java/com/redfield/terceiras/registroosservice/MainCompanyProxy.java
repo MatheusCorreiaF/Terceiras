@@ -8,8 +8,8 @@ import com.redfield.terceiras.registroosservice.model.OrdemServico;
 
 @FeignClient(name="netflix-zuul-api-gateway-server")
 public interface MainCompanyProxy {
-	
-	@PostMapping("/main-company-service/api/os")//Os PathVariables são passados para a URL
+	//faz a comunicação com a API do serviço main-company-service
+	@PostMapping("/main-company-service/api/os")
 	public OrdemServico addOS(@RequestBody OrdemServico os);
 	
 }

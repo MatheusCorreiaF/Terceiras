@@ -36,7 +36,7 @@ export class SolicitaServicoComponent implements OnInit {
       this.router.navigate(["/lista-os"])
     }
   }
-
+  //verifica se o formulário foi preenchido corretamente antes de enviar
   formIsValid()
   {
     return this.formulario.get('servico').invalid && this.formulario.get('servico').touched

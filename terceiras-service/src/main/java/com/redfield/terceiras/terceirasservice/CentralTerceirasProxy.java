@@ -14,8 +14,9 @@ import com.redfield.terceiras.terceirasservice.model.OrdemServico;
 
 @FeignClient(name="netflix-zuul-api-gateway-server")
 public interface CentralTerceirasProxy {
+	//faz a comunicação com a API do serviço central-terceiras-service
 	
-	@GetMapping("/central-terceiras-service/api/central-terceiras/terceira/{cnpj}/os")//Os PathVariables são passados para a URL
+	@GetMapping("/central-terceiras-service/api/central-terceiras/terceira/{cnpj}/os")
 	public List<OrdemServico> getOS(@NotNull @PathVariable(value = "cnpj") String cnpj);
 
 	@PutMapping("/central-terceiras-service/api/central-terceiras")//Os PathVariables são passados para a URL

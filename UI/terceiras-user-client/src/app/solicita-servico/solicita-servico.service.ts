@@ -12,7 +12,8 @@ export class SolicitaServicoService {
   //apiUrl = "http://zuul-api-gateway-server:8765/registro-os-service/registro-os";
          
   constructor(private httpClient: HttpClient) { }
-
+  
+  //envia a requisição para salvar a OS
   sendOS(os:OrdemServico)
   {
     return this.httpClient.post(this.apiUrl,os).pipe(take(1));

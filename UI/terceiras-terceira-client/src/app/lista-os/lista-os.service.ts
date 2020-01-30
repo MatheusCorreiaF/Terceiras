@@ -10,6 +10,7 @@ export class ListaOsService {
 
   constructor(private httpClient: HttpClient) { }
   
+  //busca as OS por CNPJ
   getOss() {
     let terceira = <Terceira>JSON.parse(sessionStorage.logada);
     let apiUrl = `http://localhost:8765/terceiras-service/terceiras/cnpj/${terceira.cnpj}`;

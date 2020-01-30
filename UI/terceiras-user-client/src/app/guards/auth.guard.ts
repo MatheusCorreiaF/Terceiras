@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from '../login/login.service';
-import { Cliente } from '../shared/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +12,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+      //verifica se Cliente está logado. Caso não esteja, envia para a tela de login
     if (!<boolean>JSON.parse(sessionStorage.estaAutenticado))
       this.router.navigate(["/login"]);
 

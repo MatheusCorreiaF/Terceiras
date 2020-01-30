@@ -15,7 +15,7 @@ export class AuthService implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      
+    //encaminha Cliente para a tela de login, caso ainda não o tenha feito
     if (!<boolean>JSON.parse(sessionStorage.estaAutenticada))    
       return this.router.navigate(["/login"]);
 

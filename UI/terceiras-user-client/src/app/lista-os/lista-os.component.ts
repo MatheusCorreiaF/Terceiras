@@ -17,7 +17,8 @@ export class ListaOSComponent implements OnInit {
   clienteLogado: Cliente = JSON.parse(sessionStorage.logado);
   
   constructor(private listaOsService: ListaOsService) { }
-              
+  
+  //preenche a tabela quando inicializa o componente
   ngOnInit() {
     this.reloadTable();
   }    
@@ -26,6 +27,7 @@ export class ListaOSComponent implements OnInit {
     this.reloadTable();
   }
 
+  //lista as OS
   reloadTable(){
     this.listaOsService.getOss(this.clienteLogado.uc).subscribe(
       response => {

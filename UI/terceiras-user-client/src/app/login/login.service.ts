@@ -29,7 +29,8 @@ export class LoginService {
     this.getClientes().subscribe(
       resposta => this.clientes = <Cliente[]>resposta)
   }
-
+  
+  //verifica se as credenciais são válidas
   autenticaCliente(cliente: Cliente) : boolean{
     this.clientes.forEach(element => {
       if (element.cpf == cliente.cpf && element.uc == cliente.uc) {

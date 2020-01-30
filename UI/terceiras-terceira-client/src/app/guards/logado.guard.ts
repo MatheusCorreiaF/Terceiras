@@ -13,6 +13,7 @@ export class LogadoGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
+      //verifica se o Cliente está logado, para evitar que ele acesse a págin de login estando logado
       if (<boolean>JSON.parse(sessionStorage.estaAutenticada))
       this.router.navigate(["/lista-os"]);
 

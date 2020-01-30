@@ -14,6 +14,7 @@ export class ListaOsService {
     
   constructor(private httpClient: HttpClient) { }
 
+  //busca as OS por Unidade Consumidora
   getOss(uc: Number) {
     return this.httpClient.get<OrdemServico[]>(this.apiUrl+uc);
   }
