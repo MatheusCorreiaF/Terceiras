@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redfield.terceiras.maincompany.model.OrdemServico;
+import com.redfield.terceiras.maincompany.model.Terceira;
 import com.redfield.terceiras.maincompany.repository.OrdemServicoRepository;
 
 @Service
@@ -23,7 +24,9 @@ public class OrdemServicoService {
 	private String filaEntradaOS;
 
 	public OrdemServico addOS(OrdemServico os) throws JsonProcessingException {
+		os.setObs("...");
 		os.setStatus("Pendente");
+		os.setTerceira(new Terceira(null, "A Definir"));
 		OrdemServico osThis = osR.save(os);
 		ObjectMapper obj = new ObjectMapper();
 		String json = obj.writeValueAsString(osThis);

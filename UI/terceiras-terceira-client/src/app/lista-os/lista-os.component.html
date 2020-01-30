@@ -4,7 +4,7 @@
         <table class="table table-hover">
             <thead class="thead-light">
                 <tr>
-                    <th style="width: 14%">ID</th>
+                    <th style="width: 14%">ID_OS</th>
                     <th style="width: 14%">UC</th>
                     <th style="width: 30%">Serviço</th>
                     <th style="width: 14%">Status</th>
@@ -21,6 +21,7 @@
                 </tr>
             </tbody>
         </table>
-        <h3 *ngIf="oss==null">Não lhe foram solicitadas OSs!</h3>
+        <h3 *ngIf="oss.length<1">Ainda não lhe foi solicitada OS!</h3>
     </div>
+    <button class="btn btn-primary" (click)="reloadTable()">Atualiza Tabela</button>
 </div>

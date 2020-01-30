@@ -13,11 +13,10 @@
             <div class="form-group col-md-3">
                 <label for="status">Status do Serviço</label>
                 <select formControlName="status" id="status" class="form-control">
-                    <option value="pendente">Pendente</option>
-                    <option value="emEspera">Em espera</option>
-                    <option value="emExecucao">Em Execução</option>
-                    <option value="concluido">Concluído</option>
-                    <option value="cancelado">Cancelado</option>
+                    <option value="Pendente">Pendente</option>
+                    <option value="Em Execução">Em Execução</option>
+                    <option value="Concluído">Concluído</option>
+                    <option value="Cancelado">Cancelado</option>
                 </select>
             </div>
         </div>
@@ -30,6 +29,6 @@
             <textarea type="text" class="form-control" formControlName="observacao" id="observacao" placeholder="Observação..."></textarea>
         </div>
     </form>
-    <button class="btn btn-primary" (click)="atualizarOS()">Atualizar</button>
+    <button class="btn btn-primary" (click)="atualizarOS()">Salvar</button>
     <button class="btn btn-primary" (click)="backToList()">Voltar</button>
 </div>

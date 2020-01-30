@@ -1,13 +1,5 @@
-version: "3.7"
+version: "2.1"
 services:
-  naming-server:
-    image: matheuscorreia7/netflix-eureka-naming-server:0.0.1-SNAPSHOT
-    ports:
-      - "8761:8761"
-    restart: always
-    networks:
-      - terceiras-network
-
   rabbitmq:
     image: rabbitmq:3.5.3-management
     ports:
@@ -27,20 +19,72 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_DATABASE: terceiras
+    depends_on:
+      - rabbitmq
     volumes:
-      - mysql-database-data-volume:/var/lib/mysql
+      - mysql-data-volume:/var/lib/mysql
     networks:
       - terceiras-network
+
+  postgres:
+    image: postgres:11
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "terceiras"
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - database-data-volume:/var/lib/postgresql/data
+    networks:
+      - terceiras-network
+
+  naming-server:
+    image: matheuscorreia7/netflix-eureka-naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - terceiras-network
+    healthcheck:
+      test: "exit 0"
 
   zuul-api-gateway-server:
     image: matheuscorreia7/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
     ports:
       - "8765:8765"
     restart: always
-    depends_on: # Start the depends_on first
-      - naming-server
-      - rabbitmq
-      - mysql
+    depends_on:
+      naming-server:
+        condition: service_healthy
+    networks:
+      - terceiras-network
+
+  main-company-service:
+    image: matheuscorreia7/main-company-service:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - zuul-api-gateway-server
+    networks:
+      - terceiras-network
+
+  registro-os-service:
+    image: matheuscorreia7/registro-os-service:0.0.1-SNAPSHOT
+    ports:
+      - "8181:8181"
+    restart: always
+    depends_on:
+      - main-company-service
+    networks:
+      - terceiras-network
+
+  terceiras-user-client:
+    image: matheuscorreia7/terceiras-user-client:0.0.1
+    ports:
+      - "4300:80"
+    restart: always
     networks:
       - terceiras-network
 
@@ -49,10 +93,7 @@ services:
     ports:
       - "8383:8383"
     restart: always
-    depends_on: # Start the depends_on first
-      - naming-server
-      - rabbitmq
-      - mysql
+    depends_on:
       - zuul-api-gateway-server
     networks:
       - terceiras-network
@@ -62,18 +103,22 @@ services:
     ports:
       - "8484:8484"
     restart: always
-    depends_on: # Start the depends_on first
-      - naming-server
-      - rabbitmq
-      - mysql
-      - zuul-api-gateway-server
+    depends_on:
       - central-terceiras-service
     networks:
       - terceiras-network
 
-# Volumes
+  terceiras-terceira-client:
+    image: matheuscorreia7/terceiras-terceira-client:0.0.1
+    ports:
+      - "4200:80"
+    restart: always
+    networks:
+      - terceiras-network
+
 volumes:
-  mysql-database-data-volume:
+  database-data-volume:
+  mysql-data-volume:
 
 networks:
   terceiras-network:

@@ -9,7 +9,7 @@ export class LoginService {
 
   apiURL = `http://localhost:8765/central-terceiras-service/api/central-terceiras/terceira`
   terceiras: Terceira[];
-  
+
   constructor(private httpClient: HttpClient) { }
 
   getTerceiras() {
@@ -34,7 +34,6 @@ export class LoginService {
         return true;
       }
     }
-    console.log(`Terceira não cadastrada`);
     return false;
   }
 }

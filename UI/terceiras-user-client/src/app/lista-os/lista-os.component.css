@@ -5,9 +5,15 @@ table {
 table th,
 table td {
     overflow: hidden;
+    text-align: center;
 }
 
 h1,
 h3 {
     text-align: center;
+}
+
+button {
+    margin-top: 15px;
+    font-size: 13pt;
 }

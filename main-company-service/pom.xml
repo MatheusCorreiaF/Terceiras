@@ -12,7 +12,7 @@
 	<groupId>com.redfield.terceiras.maincompany</groupId>
 	<artifactId>main-company-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MainCompany</name>
+	<name>main-company-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -95,6 +95,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.10</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<!-- <goal>push</goal> -->
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>matheuscorreia7/${project.name}</repository>
+					<tag>${project.version}</tag>
+					<skipDockerInfo>true</skipDockerInfo>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

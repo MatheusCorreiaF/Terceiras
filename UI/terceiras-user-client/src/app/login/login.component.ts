@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginService.consultar();
-    this.cliente.cpf="a123456789"
-    this.cliente.uc=101
   } 
 
   fazerLogin()

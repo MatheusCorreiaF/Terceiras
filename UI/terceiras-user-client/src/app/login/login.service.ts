@@ -8,6 +8,7 @@ import { Cliente } from '../shared/cliente';
 export class LoginService {
 
   apiUrl = "http://localhost:8765/main-company-service/api/cliente";
+  //apiUrl = "http://zuul-api-gateway-server:8765/main-company-service/api/cliente";
   clientes: Cliente[];
   
   constructor(private httpClient: HttpClient) { }

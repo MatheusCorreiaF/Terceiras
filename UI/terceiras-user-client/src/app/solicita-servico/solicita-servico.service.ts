@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators';
 export class SolicitaServicoService {
 
   apiUrl = "http://localhost:8765/registro-os-service/registro-os";
+  //apiUrl = "http://zuul-api-gateway-server:8765/registro-os-service/registro-os";
          
   constructor(private httpClient: HttpClient) { }
 

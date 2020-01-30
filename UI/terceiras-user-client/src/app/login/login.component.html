@@ -3,9 +3,17 @@
     <div *ngIf="!authValid" class="alert alert-warning">
         <span>Credenciais Inválidas!</span>
     </div>
-    <input [(ngModel)]="cliente.uc" class="form-control" type="text" placeholder="Unidade Consumidora" />
-    <br>
-    <input [(ngModel)]="cliente.cpf" class="form-control" type="text" placeholder="CPF/CNPJ" />
-    <br>
+    <div class="form-group">
+        <div class="form-row">
+            <input [(ngModel)]="cliente.uc" class="form-control" type="text" placeholder="Unidade Consumidora" />
+            <br>
+            <br>
+        </div>
+        <div class="form-row">
+            <input [(ngModel)]="cliente.cpf" class="form-control" type="text" placeholder="CPF/CNPJ" />
+            <br>
+            <br>
+        </div>
+    </div>
     <button type="button" (click)=fazerLogin() class="btn btn-primary">Acessar</button>
 </div>

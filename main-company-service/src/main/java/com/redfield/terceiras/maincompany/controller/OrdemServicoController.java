@@ -39,8 +39,6 @@ public class OrdemServicoController {
 	public OrdemServico addOS(@RequestBody OrdemServico os) throws JsonProcessingException {
 		if (clienteR.findByUc(os.getUc()) == null)
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente não encontrado!");
-		os.setStatus("pendente");
-		os.setObs("...");
 		return osS.addOS(os);
 	}
 

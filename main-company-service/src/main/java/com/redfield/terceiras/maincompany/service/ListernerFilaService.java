@@ -21,26 +21,19 @@ public class ListernerFilaService {
 	@Autowired
 	private OrdemServicoRepository osR;
 
-	//@Autowired
-	//private CentralTerceirasService ctS;
-
 	@Value("${fila.response.os}")
 	private String filaResponseOS;
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	//@HystrixCommand(fallbackMethod = "republicOnMessage")
 	@RabbitListener(queues = "${fila.response.os}")
 	public void onMessage(Message message) throws JsonParseException, JsonMappingException, IOException {
 
 		String json = new String(message.getBody(), "UTF-8");
-
 		System.out.println("Mensagem recebida:" + json);
-
 		ObjectMapper mapper = new ObjectMapper();
 		OrdemServico osFromFila = mapper.readValue(json, OrdemServico.class);
-		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		osR.save(osFromFila);
 	}
 

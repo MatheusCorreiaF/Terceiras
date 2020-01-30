@@ -12,7 +12,7 @@ public interface OrdemServicoRepository extends JpaRepository<OrdemServico, Long
 
 	List<OrdemServico> findByTerceiraCnpj(@NotNull String cnpj); 
 	
-	@Query("select os from OrdemServico os where os.terceira.cnpj = ?1 and os.status != 'Concluido'")
+	@Query("select os from OrdemServico os where os.terceira.cnpj = ?1 and os.status != 'Concluído'")
 	List<OrdemServico> listaOSnaoConcluidas(@NotNull String cnpj);
 
 }

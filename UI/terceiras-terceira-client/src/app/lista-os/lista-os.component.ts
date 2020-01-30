@@ -10,30 +10,28 @@ import { Router } from '@angular/router';
 })
 export class ListaOsComponent implements OnInit {
 
-  oss: OrdemServico[];
+  oss: OrdemServico[] = [];
 
   constructor(private listaOsService: ListaOsService,
-              private router: Router) { }
+    private router: Router) { }
 
-  ngOnInit() {    
-    this.reloadTable()
-  }    
-    
-  ngOnChanges() {    
+  ngOnInit() {
     this.reloadTable()
   }
 
-  reloadTable(){
+  ngAfterViewInit() {
+    this.reloadTable()
+  }
+
+  reloadTable() {
     this.listaOsService.getOss().subscribe(
       response => {
         this.oss = <OrdemServico[]>response;
       });
   }
-  
-  acessaDetail(os: OrdemServico)
-  {
+
+  acessaDetail(os: OrdemServico) {
     sessionStorage.osDetail = JSON.stringify(os);
-    this.router.navigate(["/lista-os/",os.id]);
+    this.router.navigate(["/lista-os/", os.id]);
   }
-  
 }

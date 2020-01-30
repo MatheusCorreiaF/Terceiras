@@ -8,3 +8,4 @@ RUN npm run build
 FROM nginx:alpine
 VOLUME /var/cache/nginx
 COPY --from=angular app/dist/terceiras-terceira-client /usr/share/nginx/html
+COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf

@@ -13,7 +13,6 @@ export class LogoutComponent implements OnInit {
   ngOnInit() {
     sessionStorage.estaAutenticada = false;
     sessionStorage.logada = null;
-    console.log("dasdas");
     this.router.navigate(["/login"]);
   }
 

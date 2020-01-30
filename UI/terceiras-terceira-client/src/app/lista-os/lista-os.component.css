@@ -5,9 +5,14 @@ table {
 table th,
 table td {
     overflow: hidden;
+    text-align: center;
 }
 
 h1,
 h3 {
     text-align: center;
+}
+
+button {
+    font-size: 13pt;
 }

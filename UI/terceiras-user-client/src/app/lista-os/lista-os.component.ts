@@ -13,25 +13,23 @@ import { delay } from 'rxjs/operators';
 })
 export class ListaOSComponent implements OnInit {
   
-  oss: OrdemServico[];
+  oss: OrdemServico[] = [];
   clienteLogado: Cliente = JSON.parse(sessionStorage.logado);
   
-  constructor(private route: ActivatedRoute, 
-              private listaOsService: ListaOsService,
-              private loginService: LoginService) { }
+  constructor(private listaOsService: ListaOsService) { }
               
-  ngOnInit() {    
-    this.reloadTable()
+  ngOnInit() {
+    this.reloadTable();
   }    
-   
-  ngOnChanges() {    
-    this.reloadTable()
+  
+  ngAfterViewInit() {
+    this.reloadTable();
   }
 
   reloadTable(){
     this.listaOsService.getOss(this.clienteLogado.uc).subscribe(
       response => {
-        this.oss = response;
+        this.oss = <OrdemServico[]>response;
       });
   }
 }
