@@ -113,7 +113,7 @@ Terceirizadas:
 
 Nesse diagrama temos dispostos os serviços  como estão conectados
 
-O fluxo da aplicação começa pelo terceiras-terceira-client. Aqui temos uma view por onde o Cliente irá preencher um formulário relatando o problema. Essa requisição é enviada para o serviço registra-os-service que posteriormente encaminha para o main-company-service. No main-company-service os dados da Ordem de Serviço são salvos no banco de dados e colocados na fila-entrada-os. O central-terceiras-service retira essas Ordens de Serviço da fila, delega uma das tercerizadas para realizar o serviço e salva no banco.
+O fluxo da aplicação começa pelo terceiras-user-client. Aqui temos uma view por onde o Cliente irá preencher um formulário relatando o problema. Essa requisição é enviada para o serviço registra-os-service que posteriormente encaminha para o main-company-service. No main-company-service os dados da Ordem de Serviço são salvos no banco de dados e colocados na fila-entrada-os. O central-terceiras-service retira essas Ordens de Serviço da fila, delega uma das tercerizadas para realizar o serviço e salva no banco.
 
 Do outro lado temos o terceiras-terceira-client, uma view que permite as terceirizadas visualizarem as Ordens de Serviço que receberam e dar um feedback, informando como está o andamento do serviço. Essas alterações são recebidas pelo terceiras-service que repassa para o central-terceiras-service. Aqui atualiza a informação salva no banco, de acordo com as alterações na Ordem de Serviço feitas pela terceirizada e em seguida essa Ordem de Serviço é enviada para a fila-response-os.
 
